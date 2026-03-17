@@ -1,0 +1,1709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BXB Worldwide | Restaurant Consulting That Transforms Revenue</title>
+  <meta name="description" content="BXB Worldwide turns struggling restaurants into thriving, profitable businesses. Expert restaurant consulting — operations, menu engineering, marketing, and turnaround strategy.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garant:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* ─── RESET & ROOT ─────────────────────────────────────────── */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --black:   #06080D;
+      --ink:     #0E1118;
+      --carbon:  #161B26;
+      --slate:   #252D3D;
+      --gold:    #C9993A;
+      --gold-lt: #E4BF72;
+      --gold-dk: #A07828;
+      --cream:   #F5F0E8;
+      --ivory:   #FAF7F1;
+      --white:   #FFFFFF;
+      --gray:    #8A93A6;
+      --muted:   #3D4558;
+
+      --font-display: 'Cormorant Garant', serif;
+      --font-body:    'Outfit', sans-serif;
+
+      --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-in-out:   cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    body {
+      background: var(--black);
+      color: var(--cream);
+      font-family: var(--font-body);
+      font-weight: 400;
+      line-height: 1.6;
+      overflow-x: hidden;
+      cursor: none;
+    }
+
+    ::selection { background: var(--gold); color: var(--black); }
+
+    /* ─── CUSTOM CURSOR ────────────────────────────────────────── */
+    #cursor {
+      position: fixed;
+      width: 12px;
+      height: 12px;
+      background: var(--gold);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: width 0.3s var(--ease-out-expo), height 0.3s var(--ease-out-expo);
+      mix-blend-mode: difference;
+    }
+    #cursor-ring {
+      position: fixed;
+      width: 40px;
+      height: 40px;
+      border: 1px solid rgba(201,153,58,0.5);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9998;
+      transform: translate(-50%, -50%);
+      transition: all 0.15s var(--ease-out-expo);
+    }
+
+    /* ─── GRAIN OVERLAY ─────────────────────────────────────────── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: -200%;
+      width: 400%;
+      height: 400%;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+      opacity: 0.04;
+      pointer-events: none;
+      z-index: 9990;
+      animation: grain 8s steps(10) infinite;
+    }
+    @keyframes grain {
+      0%,100%  { transform: translate(0, 0); }
+      10%  { transform: translate(-5%, -5%); }
+      20%  { transform: translate(-10%, 5%); }
+      30%  { transform: translate(5%, -10%); }
+      40%  { transform: translate(-5%, 15%); }
+      50%  { transform: translate(-10%, 5%); }
+      60%  { transform: translate(15%, 0); }
+      70%  { transform: translate(0, 10%); }
+      80%  { transform: translate(-15%, 0); }
+      90%  { transform: translate(10%, 5%); }
+    }
+
+    /* ─── SCROLLBAR ─────────────────────────────────────────────── */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--black); }
+    ::-webkit-scrollbar-thumb { background: var(--gold-dk); border-radius: 2px; }
+
+    /* ─── NAVIGATION ────────────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      padding: 0 60px;
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: all 0.4s var(--ease-out-expo);
+    }
+    nav.scrolled {
+      background: rgba(6, 8, 13, 0.92);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(201,153,58,0.15);
+      height: 68px;
+    }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+    .nav-logo-mark { width: 42px; height: 42px; }
+    .nav-logo-mark svg { width: 42px; height: 42px; }
+    .nav-logo-text {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--white);
+      letter-spacing: 0.02em;
+    }
+    .nav-logo-text span { color: var(--gold); }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 40px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-family: var(--font-body);
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(245,240,232,0.7);
+      text-decoration: none;
+      transition: color 0.3s;
+      position: relative;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--gold);
+      transition: width 0.3s var(--ease-out-expo);
+    }
+    .nav-links a:hover { color: var(--gold-lt); }
+    .nav-links a:hover::after { width: 100%; }
+    .nav-cta {
+      background: var(--gold) !important;
+      color: var(--black) !important;
+      padding: 10px 24px;
+      border-radius: 2px;
+      font-weight: 600 !important;
+      font-size: 0.75rem !important;
+      letter-spacing: 0.1em !important;
+      transition: background 0.3s !important;
+    }
+    .nav-cta:hover { background: var(--gold-lt) !important; }
+    .nav-cta::after { display: none !important; }
+
+    /* ─── HERO ──────────────────────────────────────────────────── */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+    .hero-bg { position: absolute; inset: 0; z-index: 0; }
+    .hero-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      transform: scale(1.05);
+      animation: heroZoom 20s ease-in-out infinite alternate;
+    }
+    @keyframes heroZoom {
+      from { transform: scale(1.05); }
+      to   { transform: scale(1.0); }
+    }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg,rgba(6,8,13,0.88) 0%,rgba(14,17,24,0.75) 50%,rgba(6,8,13,0.65) 100%);
+    }
+    .hero-overlay-bottom {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 220px;
+      background: linear-gradient(to top, var(--black), transparent);
+    }
+    .hero-lines { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+    .hero-line {
+      position: absolute;
+      background: linear-gradient(90deg, transparent, rgba(201,153,58,0.3), transparent);
+      height: 1px;
+      width: 0;
+      animation: lineDraw 2s var(--ease-out-expo) forwards;
+    }
+    .hero-line:nth-child(1) { top: 30%; animation-delay: 0.5s; }
+    .hero-line:nth-child(2) { top: 65%; animation-delay: 0.8s; }
+    .hero-line:nth-child(3) { top: 80%; animation-delay: 1.1s; }
+    @keyframes lineDraw { to { width: 100%; } }
+
+    .hero-geo {
+      position: absolute;
+      right: 8%;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 380px;
+      height: 380px;
+      opacity: 0;
+      animation: geoFade 1s ease forwards 1.4s;
+    }
+    @keyframes geoFade { to { opacity: 0.12; } }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      padding: 140px 60px 80px;
+      max-width: 760px;
+    }
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 28px;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.8s var(--ease-out-expo) forwards 0.3s;
+    }
+    .hero-eyebrow-line { width: 40px; height: 1px; background: var(--gold); }
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(3.2rem, 7vw, 6.5rem);
+      font-weight: 300;
+      line-height: 1.0;
+      letter-spacing: -0.02em;
+      color: var(--white);
+      margin-bottom: 28px;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeUp 0.9s var(--ease-out-expo) forwards 0.5s;
+    }
+    .hero-title strong {
+      font-weight: 700;
+      font-style: italic;
+      color: var(--gold-lt);
+      display: block;
+    }
+    .hero-sub {
+      font-size: 1.1rem;
+      font-weight: 300;
+      color: rgba(245,240,232,0.75);
+      max-width: 520px;
+      line-height: 1.7;
+      margin-bottom: 48px;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.8s var(--ease-out-expo) forwards 0.7s;
+    }
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.8s var(--ease-out-expo) forwards 0.9s;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--gold);
+      color: var(--black);
+      font-family: var(--font-body);
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 18px 36px;
+      border: none;
+      border-radius: 2px;
+      cursor: pointer;
+      transition: all 0.3s var(--ease-out-expo);
+      position: relative;
+      overflow: hidden;
+    }
+    .btn-primary::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(255,255,255,0.15);
+      transform: translateX(-100%);
+      transition: transform 0.4s var(--ease-out-expo);
+    }
+    .btn-primary:hover::before { transform: translateX(0); }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(201,153,58,0.35); }
+
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: transparent;
+      color: var(--cream);
+      font-family: var(--font-body);
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 17px 32px;
+      border: 1px solid rgba(245,240,232,0.3);
+      border-radius: 2px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .btn-outline:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
+
+    .hero-trust {
+      position: absolute;
+      bottom: 60px; left: 60px; right: 60px;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      gap: 40px;
+      opacity: 0;
+      animation: fadeUp 0.8s var(--ease-out-expo) forwards 1.2s;
+    }
+    .hero-trust-item .number {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 600;
+      color: var(--gold-lt);
+      line-height: 1;
+    }
+    .hero-trust-item .label {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(245,240,232,0.55);
+      line-height: 1.3;
+    }
+    .hero-trust-divider { width: 1px; height: 40px; background: rgba(201,153,58,0.3); }
+
+    @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+
+    /* ─── MARQUEE ───────────────────────────────────────────────── */
+    .marquee-bar { background: var(--gold); padding: 14px 0; overflow: hidden; white-space: nowrap; }
+    .marquee-track { display: inline-flex; animation: marquee 30s linear infinite; }
+    .marquee-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 20px;
+      font-family: var(--font-body);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--black);
+      padding: 0 30px;
+    }
+    .marquee-dot { width: 5px; height: 5px; background: var(--black); border-radius: 50%; opacity: 0.4; }
+    @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+    /* ─── SECTION GENERIC ───────────────────────────────────────── */
+    section { position: relative; }
+    .section-inner { max-width: 1280px; margin: 0 auto; padding: 0 60px; }
+    .section-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 20px;
+    }
+    .section-eyebrow::before { content: ''; width: 30px; height: 1px; background: var(--gold); }
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.4rem, 4.5vw, 4rem);
+      font-weight: 300;
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+      color: var(--white);
+    }
+    .section-title em { font-style: italic; font-weight: 600; color: var(--gold-lt); }
+    .section-body { font-size: 1.05rem; font-weight: 300; color: rgba(245,240,232,0.65); line-height: 1.75; max-width: 580px; }
+
+    /* ─── PAIN POINTS ───────────────────────────────────────────── */
+    .pain-section { padding: 120px 0; background: var(--ink); }
+    .pain-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+    .pain-left .section-title { margin-bottom: 24px; }
+    .pain-left .section-body { margin-bottom: 40px; }
+    .pain-list { list-style: none; display: flex; flex-direction: column; gap: 16px; }
+    .pain-list li { display: flex; align-items: flex-start; gap: 14px; font-size: 0.95rem; color: rgba(245,240,232,0.75); }
+    .pain-check {
+      flex-shrink: 0;
+      width: 20px; height: 20px;
+      border-radius: 50%;
+      background: rgba(201,153,58,0.15);
+      border: 1px solid var(--gold);
+      display: flex; align-items: center; justify-content: center;
+      margin-top: 2px;
+    }
+    .pain-check svg { width: 10px; height: 10px; }
+    .pain-cards-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .pain-card {
+      background: var(--carbon);
+      border: 1px solid rgba(201,153,58,0.1);
+      border-radius: 4px;
+      padding: 36px;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .pain-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 3px; height: 0;
+      background: var(--gold);
+      transition: height 0.4s var(--ease-out-expo);
+    }
+    .pain-card:hover { border-color: rgba(201,153,58,0.3); transform: translateY(-4px); }
+    .pain-card:hover::before { height: 100%; }
+    .pain-stat-big { font-family: var(--font-display); font-size: 3.5rem; font-weight: 700; color: var(--gold-lt); line-height: 1; margin-bottom: 10px; }
+    .pain-stat-label { font-size: 0.85rem; color: rgba(245,240,232,0.55); font-weight: 400; }
+
+    /* ─── SERVICES ──────────────────────────────────────────────── */
+    .services-section { padding: 120px 0; background: var(--black); }
+    .services-header { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: end; margin-bottom: 70px; }
+    .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+    .service-card {
+      background: var(--carbon);
+      padding: 44px 36px;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      transition: background 0.4s;
+      min-height: 300px;
+      display: flex;
+      flex-direction: column;
+    }
+    .service-card::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(201,153,58,0.06) 0%, transparent 100%);
+      opacity: 0;
+      transition: opacity 0.4s;
+    }
+    .service-card:hover { background: var(--slate); }
+    .service-card:hover::after { opacity: 1; }
+    .service-icon { width: 52px; height: 52px; margin-bottom: 28px; position: relative; z-index: 1; }
+    .service-icon svg { width: 52px; height: 52px; }
+    .service-num { font-family: var(--font-display); font-size: 0.9rem; font-weight: 600; color: rgba(201,153,58,0.35); letter-spacing: 0.1em; margin-bottom: 16px; position: relative; z-index: 1; }
+    .service-name { font-family: var(--font-display); font-size: 1.5rem; font-weight: 600; color: var(--white); margin-bottom: 14px; line-height: 1.2; position: relative; z-index: 1; }
+    .service-desc { font-size: 0.88rem; color: rgba(245,240,232,0.55); line-height: 1.7; flex-grow: 1; position: relative; z-index: 1; }
+    .service-arrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-top: 24px;
+      text-decoration: none;
+      position: relative; z-index: 1;
+      opacity: 0; transform: translateY(8px);
+      transition: opacity 0.3s, transform 0.3s;
+    }
+    .service-card:hover .service-arrow { opacity: 1; transform: translateY(0); }
+
+    /* ─── STATS ─────────────────────────────────────────────────── */
+    .stats-section {
+      padding: 100px 0;
+      background: var(--gold);
+      overflow: hidden;
+      position: relative;
+    }
+    .stats-section::before {
+      content: 'BXB';
+      position: absolute;
+      font-family: var(--font-display);
+      font-size: 30vw;
+      font-weight: 700;
+      color: rgba(6,8,13,0.06);
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      white-space: nowrap;
+      pointer-events: none;
+    }
+    .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); position: relative; z-index: 1; }
+    .stat-item { padding: 40px 50px; border-right: 1px solid rgba(6,8,13,0.12); text-align: center; }
+    .stat-item:last-child { border-right: none; }
+    .stat-num { font-family: var(--font-display); font-size: clamp(3rem, 5vw, 5rem); font-weight: 700; color: var(--black); line-height: 1; margin-bottom: 10px; }
+    .stat-label { font-size: 0.78rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(6,8,13,0.6); }
+
+    /* ─── WHY BXB ────────────────────────────────────────────────── */
+    .why-section { padding: 130px 0; background: var(--ink); overflow: hidden; }
+    .why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+    .why-visual { position: relative; height: 580px; }
+    .why-img-main { position: absolute; right: 0; top: 0; width: 85%; height: 80%; object-fit: cover; border-radius: 3px; }
+    .why-img-accent { position: absolute; left: 0; bottom: 0; width: 55%; height: 55%; object-fit: cover; border-radius: 3px; border: 4px solid var(--ink); }
+    .why-badge {
+      position: absolute; right: 20px; bottom: 100px;
+      background: var(--gold); color: var(--black);
+      padding: 20px 24px; border-radius: 3px; text-align: center;
+    }
+    .why-badge-num { font-family: var(--font-display); font-size: 2.6rem; font-weight: 700; line-height: 1; display: block; }
+    .why-badge-text { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; display: block; margin-top: 4px; }
+    .why-content .section-title { margin-bottom: 20px; }
+    .why-content .section-body { margin-bottom: 40px; }
+    .why-points { display: flex; flex-direction: column; gap: 28px; }
+    .why-point { display: flex; gap: 20px; }
+    .why-point-icon {
+      flex-shrink: 0;
+      width: 44px; height: 44px;
+      background: rgba(201,153,58,0.1);
+      border: 1px solid rgba(201,153,58,0.25);
+      border-radius: 3px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .why-point-icon svg { width: 20px; height: 20px; }
+    .why-point-content h4 { font-family: var(--font-display); font-size: 1.15rem; font-weight: 600; color: var(--white); margin-bottom: 6px; }
+    .why-point-content p { font-size: 0.88rem; color: rgba(245,240,232,0.55); line-height: 1.65; }
+
+    /* ─── PROCESS ───────────────────────────────────────────────── */
+    .process-section { padding: 130px 0; background: var(--black); }
+    .process-header { text-align: center; max-width: 640px; margin: 0 auto 80px; }
+    .process-header .section-eyebrow { justify-content: center; }
+    .process-header .section-eyebrow::before { display: none; }
+    .process-header .section-eyebrow::after { content: ''; width: 30px; height: 1px; background: var(--gold); }
+    .process-steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      position: relative;
+    }
+    .process-steps::before {
+      content: '';
+      position: absolute;
+      top: 44px;
+      left: calc(12.5% + 22px);
+      right: calc(12.5% + 22px);
+      height: 1px;
+      background: linear-gradient(90deg, var(--gold), rgba(201,153,58,0.2), var(--gold), rgba(201,153,58,0.2));
+    }
+    .process-step { padding: 0 30px; text-align: center; }
+    .step-num {
+      width: 88px; height: 88px;
+      border-radius: 50%;
+      background: var(--carbon);
+      border: 1px solid rgba(201,153,58,0.25);
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 32px;
+      font-family: var(--font-display);
+      font-size: 1.8rem; font-weight: 600;
+      color: var(--gold-lt);
+      position: relative; z-index: 1;
+      transition: all 0.3s;
+    }
+    .process-step:hover .step-num { background: var(--gold); color: var(--black); border-color: var(--gold); transform: scale(1.05); }
+    .step-title { font-family: var(--font-display); font-size: 1.3rem; font-weight: 600; color: var(--white); margin-bottom: 12px; }
+    .step-desc { font-size: 0.875rem; color: rgba(245,240,232,0.5); line-height: 1.65; }
+
+    /* ─── TESTIMONIALS ──────────────────────────────────────────── */
+    .testimonials-section { padding: 130px 0; background: var(--carbon); overflow: hidden; }
+    .testimonials-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 70px; }
+    .testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .testimonial-card {
+      background: var(--ink);
+      border: 1px solid rgba(201,153,58,0.08);
+      border-radius: 4px;
+      padding: 40px;
+      transition: transform 0.3s, border-color 0.3s;
+    }
+    .testimonial-card:hover { transform: translateY(-8px); border-color: rgba(201,153,58,0.25); }
+    .testimonial-card:nth-child(2) { margin-top: 30px; }
+    .quote-mark { font-family: var(--font-display); font-size: 5rem; color: var(--gold); opacity: 0.2; line-height: 1; margin-bottom: -20px; display: block; }
+    .testimonial-text { font-family: var(--font-display); font-size: 1.15rem; font-weight: 400; font-style: italic; color: rgba(245,240,232,0.85); line-height: 1.7; margin-bottom: 32px; }
+    .testimonial-author { display: flex; align-items: center; gap: 14px; }
+    .author-avatar { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; border: 2px solid rgba(201,153,58,0.3); }
+    .author-name { font-weight: 600; font-size: 0.9rem; color: var(--white); margin-bottom: 3px; }
+    .author-role { font-size: 0.78rem; color: var(--gold); letter-spacing: 0.05em; }
+    .stars { display: flex; gap: 3px; margin-bottom: 20px; }
+    .stars svg { width: 14px; height: 14px; fill: var(--gold); }
+
+    /* ─── RESULTS ───────────────────────────────────────────────── */
+    .results-section { padding: 130px 0; background: var(--ink); }
+    .results-header { text-align: center; max-width: 600px; margin: 0 auto 80px; }
+    .results-header .section-eyebrow { justify-content: center; }
+    .results-header .section-eyebrow::before { display: none; }
+    .results-header .section-eyebrow::after { content: ''; width: 30px; height: 1px; background: var(--gold); }
+    .results-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .result-card { background: var(--carbon); border-radius: 4px; overflow: hidden; transition: transform 0.3s; }
+    .result-card:hover { transform: translateY(-6px); }
+    .result-img-wrap { overflow: hidden; }
+    .result-img { width: 100%; height: 220px; object-fit: cover; display: block; transition: transform 0.6s var(--ease-out-expo); }
+    .result-card:hover .result-img { transform: scale(1.05); }
+    .result-body { padding: 32px; }
+    .result-tag { display: inline-block; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--black); background: var(--gold); padding: 4px 10px; border-radius: 1px; margin-bottom: 16px; }
+    .result-name { font-family: var(--font-display); font-size: 1.3rem; font-weight: 600; color: var(--white); margin-bottom: 10px; }
+    .result-desc { font-size: 0.85rem; color: rgba(245,240,232,0.5); margin-bottom: 24px; line-height: 1.6; }
+    .result-metrics { display: flex; gap: 24px; padding-top: 24px; border-top: 1px solid rgba(201,153,58,0.1); }
+    .result-metric .val { font-family: var(--font-display); font-size: 1.6rem; font-weight: 700; color: var(--gold-lt); display: block; line-height: 1; }
+    .result-metric .key { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(245,240,232,0.4); display: block; margin-top: 4px; }
+
+    /* ─── INDUSTRIES ────────────────────────────────────────────── */
+    .industries-section { padding: 100px 0; background: var(--black); }
+    .industries-header { text-align: center; margin-bottom: 60px; }
+    .industries-header .section-eyebrow { justify-content: center; }
+    .industries-header .section-eyebrow::before { display: none; }
+    .industries-header .section-eyebrow::after { content: ''; width: 30px; height: 1px; background: var(--gold); }
+    .industries-row { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    .industry-pill {
+      display: flex; align-items: center; gap: 10px;
+      background: var(--carbon);
+      border: 1px solid rgba(201,153,58,0.1);
+      border-radius: 100px;
+      padding: 12px 24px;
+      font-size: 0.85rem; font-weight: 500;
+      color: rgba(245,240,232,0.7);
+      transition: all 0.3s;
+    }
+    .industry-pill:hover { border-color: var(--gold); color: var(--gold-lt); background: rgba(201,153,58,0.06); }
+    .industry-pill svg { width: 16px; height: 16px; }
+
+    /* ─── CTA SECTION ───────────────────────────────────────────── */
+    .cta-section { padding: 160px 0; position: relative; overflow: hidden; }
+    .cta-bg { position: absolute; inset: 0; }
+    .cta-bg img { width: 100%; height: 100%; object-fit: cover; }
+    .cta-bg::after { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(6,8,13,0.95) 0%, rgba(14,17,24,0.85) 100%); }
+    .cta-inner { position: relative; z-index: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+    .cta-left .section-title { margin-bottom: 20px; }
+    .cta-left .section-body { margin-bottom: 40px; }
+    .cta-features { display: flex; flex-direction: column; gap: 14px; }
+    .cta-feature { display: flex; align-items: center; gap: 12px; font-size: 0.9rem; color: rgba(245,240,232,0.75); }
+    .cta-feature-dot { width: 6px; height: 6px; background: var(--gold); border-radius: 50%; flex-shrink: 0; }
+
+    .cta-form {
+      background: rgba(14,17,24,0.7);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(201,153,58,0.15);
+      border-radius: 4px;
+      padding: 48px;
+    }
+    .form-title { font-family: var(--font-display); font-size: 1.8rem; font-weight: 600; color: var(--white); margin-bottom: 8px; }
+    .form-sub { font-size: 0.85rem; color: rgba(245,240,232,0.5); margin-bottom: 36px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+    .form-group { display: flex; flex-direction: column; gap: 8px; }
+    .form-group.full { grid-column: 1 / -1; }
+    .form-label { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(245,240,232,0.5); }
+    .form-input, .form-select, .form-textarea {
+      background: rgba(6,8,13,0.6);
+      border: 1px solid rgba(201,153,58,0.15);
+      border-radius: 2px;
+      padding: 14px 16px;
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      color: var(--cream);
+      outline: none;
+      transition: border-color 0.3s;
+      width: 100%;
+    }
+    .form-input:focus, .form-select:focus, .form-textarea:focus { border-color: var(--gold); }
+    .form-input::placeholder, .form-textarea::placeholder { color: rgba(245,240,232,0.2); }
+    .form-select option { background: var(--carbon); }
+    .form-textarea { resize: vertical; min-height: 100px; }
+    .form-submit {
+      width: 100%;
+      padding: 18px;
+      background: var(--gold);
+      border: none; border-radius: 2px;
+      font-family: var(--font-body);
+      font-size: 0.82rem; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--black);
+      cursor: pointer;
+      margin-top: 8px;
+      transition: all 0.3s;
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+    }
+    .form-submit:hover { background: var(--gold-lt); transform: translateY(-2px); box-shadow: 0 12px 40px rgba(201,153,58,0.3); }
+    .form-submit:disabled { background: #2D7A4F; color: var(--white); transform: none; box-shadow: none; cursor: default; }
+    .form-disclaimer { font-size: 0.72rem; color: rgba(245,240,232,0.3); text-align: center; margin-top: 14px; line-height: 1.5; }
+
+    /* ─── FOOTER ────────────────────────────────────────────────── */
+    footer { background: var(--carbon); border-top: 1px solid rgba(201,153,58,0.1); padding: 80px 0 40px; }
+    .footer-grid { display: grid; grid-template-columns: 1.8fr 1fr 1fr 1fr; gap: 60px; margin-bottom: 60px; }
+    .footer-brand .nav-logo { margin-bottom: 20px; display: inline-flex; }
+    .footer-brand p { font-size: 0.88rem; color: rgba(245,240,232,0.5); line-height: 1.7; margin-bottom: 28px; }
+    .footer-social { display: flex; gap: 12px; }
+    .social-link {
+      width: 38px; height: 38px;
+      background: rgba(201,153,58,0.08);
+      border: 1px solid rgba(201,153,58,0.15);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      text-decoration: none;
+      color: rgba(245,240,232,0.5);
+      transition: all 0.3s;
+    }
+    .social-link:hover { background: var(--gold); border-color: var(--gold); color: var(--black); transform: translateY(-3px); }
+    .social-link svg { width: 16px; height: 16px; }
+    .footer-col h4 { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 24px; }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+    .footer-links a { font-size: 0.88rem; color: rgba(245,240,232,0.5); text-decoration: none; transition: color 0.3s; }
+    .footer-links a:hover { color: var(--gold-lt); }
+    .footer-bottom { padding-top: 32px; border-top: 1px solid rgba(245,240,232,0.06); display: flex; align-items: center; justify-content: space-between; }
+    .footer-copy { font-size: 0.78rem; color: rgba(245,240,232,0.3); }
+    .footer-badge { display: flex; align-items: center; gap: 8px; font-size: 0.72rem; color: rgba(245,240,232,0.3); }
+    .footer-badge-dot { width: 6px; height: 6px; background: var(--gold); border-radius: 50%; animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(0.8)} }
+
+    /* ─── SCROLL REVEAL ─────────────────────────────────────────── */
+    .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.9s var(--ease-out-expo), transform 0.9s var(--ease-out-expo); }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+
+    /* ─── FLOATING PHONE ────────────────────────────────────────── */
+    .floating-cta { position: fixed; bottom: 30px; right: 30px; z-index: 900; animation: floatIn 0.8s var(--ease-out-expo) 1.5s both; }
+    .floating-phone {
+      display: flex; align-items: center; gap: 12px;
+      background: var(--gold); color: var(--black);
+      padding: 14px 22px; border-radius: 100px;
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em;
+      text-decoration: none;
+      box-shadow: 0 8px 32px rgba(201,153,58,0.4);
+      transition: all 0.3s;
+    }
+    .floating-phone:hover { background: var(--gold-lt); transform: translateY(-3px); box-shadow: 0 16px 48px rgba(201,153,58,0.5); }
+    .floating-phone svg { width: 16px; height: 16px; }
+    @keyframes floatIn { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* ─── RESPONSIVE ────────────────────────────────────────────── */
+    @media (max-width: 1024px) {
+      nav { padding: 0 30px; }
+      .nav-links { gap: 24px; }
+      .section-inner { padding: 0 30px; }
+      .hero-content { padding: 140px 30px 80px; }
+      .hero-trust { left: 30px; right: 30px; gap: 24px; }
+      .services-grid { grid-template-columns: repeat(2, 1fr); }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .stat-item { border-bottom: 1px solid rgba(6,8,13,0.12); }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
+    }
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hero-content { padding: 120px 20px 60px; max-width: 100%; }
+      .hero-trust { display: none; }
+      .section-inner { padding: 0 20px; }
+      .pain-grid, .why-grid, .cta-inner { grid-template-columns: 1fr; gap: 50px; }
+      .why-visual { height: 360px; }
+      .services-grid { grid-template-columns: 1fr; }
+      .services-header { grid-template-columns: 1fr; gap: 20px; }
+      .process-steps { grid-template-columns: 1fr 1fr; gap: 40px; }
+      .process-steps::before { display: none; }
+      .testimonials-grid, .results-grid { grid-template-columns: 1fr; }
+      .testimonial-card:nth-child(2) { margin-top: 0; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .form-row { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; gap: 40px; }
+      .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
+      .hero-geo { display: none; }
+      .pain-cards-grid { grid-template-columns: 1fr; }
+      .testimonials-header { flex-direction: column; gap: 20px; align-items: flex-start; }
+      body { cursor: auto; }
+      #cursor, #cursor-ring { display: none; }
+      .floating-cta { bottom: 20px; right: 20px; }
+      .cta-form { padding: 28px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="cursor"></div>
+  <div id="cursor-ring"></div>
+
+  <!-- Floating CTA -->
+  <div class="floating-cta">
+    <a href="tel:+18005551234" class="floating-phone">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+        <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81a19.79 19.79 0 01-3.07-8.67A2 2 0 012.18 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.18 6.18l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/>
+      </svg>
+      Free Consultation
+    </a>
+  </div>
+
+  <!-- ─────────────────────────────────── NAVIGATION -->
+  <nav id="navbar">
+    <a href="#" class="nav-logo">
+      <div class="nav-logo-mark">
+        <svg viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect width="42" height="42" rx="2" fill="rgba(201,153,58,0.1)" stroke="rgba(201,153,58,0.3)" stroke-width="0.5"/>
+          <text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" font-family="Cormorant Garant, serif" font-size="18" font-weight="700" fill="#C9993A">BXB</text>
+        </svg>
+      </div>
+      <span class="nav-logo-text">BXB<span>Worldwide</span></span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#process">Process</a></li>
+      <li><a href="#results">Results</a></li>
+      <li><a href="#testimonials">Testimonials</a></li>
+      <li><a href="#contact" class="nav-cta">Free Consultation</a></li>
+    </ul>
+  </nav>
+
+  <!-- ─────────────────────────────────────────── HERO -->
+  <section class="hero" id="home">
+    <div class="hero-bg">
+      <img
+        src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1800&auto=format&fit=crop&q=80"
+        alt="Elegant fine dining restaurant interior"
+        class="hero-img"
+        loading="eager"
+      >
+      <div class="hero-overlay"></div>
+      <div class="hero-overlay-bottom"></div>
+      <div class="hero-lines">
+        <div class="hero-line"></div>
+        <div class="hero-line"></div>
+        <div class="hero-line"></div>
+      </div>
+    </div>
+
+    <div class="hero-geo" aria-hidden="true">
+      <svg viewBox="0 0 380 380" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="190" cy="190" r="189" stroke="#C9993A" stroke-width="0.5" stroke-dasharray="4 8"/>
+        <circle cx="190" cy="190" r="140" stroke="#C9993A" stroke-width="0.5" stroke-dasharray="2 6"/>
+        <circle cx="190" cy="190" r="90"  stroke="#C9993A" stroke-width="1"   stroke-dasharray="1 4"/>
+        <line x1="0"   y1="190" x2="380" y2="190" stroke="#C9993A" stroke-width="0.3" stroke-dasharray="6 12"/>
+        <line x1="190" y1="0"   x2="190" y2="380" stroke="#C9993A" stroke-width="0.3" stroke-dasharray="6 12"/>
+      </svg>
+    </div>
+
+    <div class="hero-content">
+      <div class="hero-eyebrow">
+        <span class="hero-eyebrow-line"></span>
+        Restaurant Consulting Specialists
+      </div>
+      <h1 class="hero-title">
+        Your Restaurant.
+        <strong>Reimagined.</strong>
+        Profitable.
+      </h1>
+      <p class="hero-sub">
+        BXB Worldwide delivers elite restaurant consulting that transforms underperforming venues into thriving, scalable businesses. We've engineered over $2.8 billion in restaurant revenue — yours could be next.
+      </p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn-primary">
+          Get Your Free Strategy Call
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="#results" class="btn-outline">See Client Results</a>
+      </div>
+    </div>
+
+    <div class="hero-trust" aria-label="Key statistics">
+      <div class="hero-trust-item">
+        <div class="number" data-count="650">650+</div>
+        <div class="label">Restaurants<br>Transformed</div>
+      </div>
+      <div class="hero-trust-divider"></div>
+      <div class="hero-trust-item">
+        <div class="number">$2.8B+</div>
+        <div class="label">Revenue<br>Generated</div>
+      </div>
+      <div class="hero-trust-divider"></div>
+      <div class="hero-trust-item">
+        <div class="number">97%</div>
+        <div class="label">Client<br>Retention</div>
+      </div>
+      <div class="hero-trust-divider"></div>
+      <div class="hero-trust-item">
+        <div class="number">40+</div>
+        <div class="label">Countries<br>Served</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────────────────────────────── MARQUEE BAR -->
+  <div class="marquee-bar" aria-hidden="true">
+    <div class="marquee-track">
+      <span class="marquee-item">Operations Optimization <span class="marquee-dot"></span></span>
+      <span class="marquee-item">Menu Engineering <span class="marquee-dot"></span></span>
+      <span class="marquee-item">Revenue Growth Strategy <span class="marquee-dot"></span></span>
+      <span class="marquee-item">Staff Performance Training <span class="marquee-dot"></span></span>
+      <span class="marquee-item">Concept Development <span class="marquee-dot"></span></span>
+      <span class="marquee-item">Franchise Consulting <span class="marquee-dot"></span></span>
+      <span class="marquee-item">Marketing & Brand Strategy <span class="marquee-dot"></span></span>
+      <span class="marquee-item">Restaurant Turnaround <span class="marquee-dot"></span></span>
+      <span class="marquee-item">Operations Optimization <span class="marquee-dot"></span></span>
+      <span class="marquee-item">Menu Engineering <span class="marquee-dot"></span></span>
+      <span class="marquee-item">Revenue Growth Strategy <span class="marquee-dot"></span></span>
+      <span class="marquee-item">Staff Performance Training <span class="marquee-dot"></span></span>
+      <span class="marquee-item">Concept Development <span class="marquee-dot"></span></span>
+      <span class="marquee-item">Franchise Consulting <span class="marquee-dot"></span></span>
+      <span class="marquee-item">Marketing & Brand Strategy <span class="marquee-dot"></span></span>
+      <span class="marquee-item">Restaurant Turnaround <span class="marquee-dot"></span></span>
+    </div>
+  </div>
+
+  <!-- ─────────────────────────────────── PAIN POINTS -->
+  <section class="pain-section" id="about">
+    <div class="section-inner">
+      <div class="pain-grid">
+        <div class="pain-left reveal">
+          <div class="section-eyebrow">The Reality Check</div>
+          <h2 class="section-title">Is Your Restaurant <em>Bleeding</em> Revenue?</h2>
+          <p class="section-body">
+            Most restaurant owners work 80-hour weeks watching their margins shrink. The problem isn't passion — it's hidden operational gaps draining your profits every single day.
+          </p>
+          <ul class="pain-list">
+            <li>
+              <span class="pain-check" aria-hidden="true">
+                <svg viewBox="0 0 10 10" fill="none"><path d="M2 5l2.5 2.5L8 3" stroke="#C9993A" stroke-width="1.5" stroke-linecap="round"/></svg>
+              </span>
+              Food cost above 32%? We typically reduce it by 8–14 points within 60 days.
+            </li>
+            <li>
+              <span class="pain-check" aria-hidden="true">
+                <svg viewBox="0 0 10 10" fill="none"><path d="M2 5l2.5 2.5L8 3" stroke="#C9993A" stroke-width="1.5" stroke-linecap="round"/></svg>
+              </span>
+              Table turnover too slow? Our systems increase covers-per-shift by 35% on average.
+            </li>
+            <li>
+              <span class="pain-check" aria-hidden="true">
+                <svg viewBox="0 0 10 10" fill="none"><path d="M2 5l2.5 2.5L8 3" stroke="#C9993A" stroke-width="1.5" stroke-linecap="round"/></svg>
+              </span>
+              Staff turnover costing thousands? We cut it by more than half in 90 days.
+            </li>
+            <li>
+              <span class="pain-check" aria-hidden="true">
+                <svg viewBox="0 0 10 10" fill="none"><path d="M2 5l2.5 2.5L8 3" stroke="#C9993A" stroke-width="1.5" stroke-linecap="round"/></svg>
+              </span>
+              Menu not converting? Our engineering lifts average check by 22% on average.
+            </li>
+            <li>
+              <span class="pain-check" aria-hidden="true">
+                <svg viewBox="0 0 10 10" fill="none"><path d="M2 5l2.5 2.5L8 3" stroke="#C9993A" stroke-width="1.5" stroke-linecap="round"/></svg>
+              </span>
+              Invisible online? We build marketing systems that fill your tables every night.
+            </li>
+          </ul>
+        </div>
+
+        <div class="pain-right reveal reveal-delay-2">
+          <div class="pain-cards-grid">
+            <div class="pain-card">
+              <div class="pain-stat-big">60%</div>
+              <div class="pain-stat-label">of restaurants fail in year one — most could have been saved with the right strategy</div>
+            </div>
+            <div class="pain-card">
+              <div class="pain-stat-big">$40K</div>
+              <div class="pain-stat-label">average annual loss from unoptimized menu pricing and portion control alone</div>
+            </div>
+            <div class="pain-card">
+              <div class="pain-stat-big">3.5×</div>
+              <div class="pain-stat-label">average revenue multiplier our clients achieve within 18 months of engagement</div>
+            </div>
+            <div class="pain-card">
+              <div class="pain-stat-big">90</div>
+              <div class="pain-stat-label">days is all it takes to see measurable, significant results with BXB Worldwide</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────────────────────────────────── SERVICES -->
+  <section class="services-section" id="services">
+    <div class="section-inner">
+      <div class="services-header">
+        <div class="reveal">
+          <div class="section-eyebrow">What We Do</div>
+          <h2 class="section-title">End-to-End Restaurant<br><em>Excellence</em></h2>
+        </div>
+        <p class="section-body reveal reveal-delay-2">
+          From concept to exit, BXB Worldwide provides every strategic lever your restaurant needs to dominate its market. Our consultants have owned, operated, and scaled hundreds of food businesses worldwide.
+        </p>
+      </div>
+
+      <div class="services-grid">
+        <div class="service-card reveal">
+          <span class="service-num">01</span>
+          <div class="service-icon" aria-hidden="true">
+            <svg viewBox="0 0 52 52" fill="none"><circle cx="26" cy="26" r="25" stroke="rgba(201,153,58,0.2)" stroke-width="1"/><path d="M16 36V26M22 36V20M28 36V24M34 36V16" stroke="#C9993A" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </div>
+          <div class="service-name">Operations Consulting</div>
+          <p class="service-desc">We audit every process — from prep kitchen to front-of-house flow — and rebuild operations for maximum efficiency and profitability. Expect measurable cost reductions within 60 days.</p>
+          <a href="#contact" class="service-arrow">
+            Learn More
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+
+        <div class="service-card reveal reveal-delay-1">
+          <span class="service-num">02</span>
+          <div class="service-icon" aria-hidden="true">
+            <svg viewBox="0 0 52 52" fill="none"><circle cx="26" cy="26" r="25" stroke="rgba(201,153,58,0.2)" stroke-width="1"/><rect x="14" y="18" width="24" height="16" rx="2" stroke="#C9993A" stroke-width="1.5"/><path d="M20 22h12M20 26h8M20 30h10" stroke="#C9993A" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </div>
+          <div class="service-name">Menu Engineering</div>
+          <p class="service-desc">Our proprietary menu engineering methodology identifies your stars, plowhorses, and dogs — redesigning your offering to psychologically guide guests toward high-margin selections. Average check increases 22%.</p>
+          <a href="#contact" class="service-arrow">
+            Learn More
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+
+        <div class="service-card reveal reveal-delay-2">
+          <span class="service-num">03</span>
+          <div class="service-icon" aria-hidden="true">
+            <svg viewBox="0 0 52 52" fill="none"><circle cx="26" cy="26" r="25" stroke="rgba(201,153,58,0.2)" stroke-width="1"/><path d="M26 16l3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z" stroke="#C9993A" stroke-width="1.5" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="service-name">Financial Optimization</div>
+          <p class="service-desc">Deep forensic analysis of your P&L uncovers hidden leaks and opportunities your accountant will never find. We implement controls, reporting dashboards, and pricing strategies that dramatically improve net margins.</p>
+          <a href="#contact" class="service-arrow">
+            Learn More
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+
+        <div class="service-card reveal reveal-delay-1">
+          <span class="service-num">04</span>
+          <div class="service-icon" aria-hidden="true">
+            <svg viewBox="0 0 52 52" fill="none"><circle cx="26" cy="26" r="25" stroke="rgba(201,153,58,0.2)" stroke-width="1"/><circle cx="26" cy="22" r="5" stroke="#C9993A" stroke-width="1.5"/><path d="M16 36c0-5.523 4.477-10 10-10s10 4.477 10 10" stroke="#C9993A" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </div>
+          <div class="service-name">Staff & Leadership Training</div>
+          <p class="service-desc">We build high-performance teams through proven hospitality training programs, management systems, and culture frameworks. Our clients cut staff turnover by 54% on average — saving tens of thousands annually.</p>
+          <a href="#contact" class="service-arrow">
+            Learn More
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+
+        <div class="service-card reveal reveal-delay-2">
+          <span class="service-num">05</span>
+          <div class="service-icon" aria-hidden="true">
+            <svg viewBox="0 0 52 52" fill="none"><circle cx="26" cy="26" r="25" stroke="rgba(201,153,58,0.2)" stroke-width="1"/><path d="M16 26c0-5.523 4.477-10 10-10s10 4.477 10 10M14 32h24" stroke="#C9993A" stroke-width="1.5" stroke-linecap="round"/><path d="M21 32v4M31 32v4M26 26v-6" stroke="#C9993A" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </div>
+          <div class="service-name">Marketing & Digital Growth</div>
+          <p class="service-desc">From Google and Yelp optimization to social media strategy and paid acquisition, we build omni-channel marketing systems that consistently fill seats and grow your catering pipeline. We don't just advise — we execute.</p>
+          <a href="#contact" class="service-arrow">
+            Learn More
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+
+        <div class="service-card reveal reveal-delay-3">
+          <span class="service-num">06</span>
+          <div class="service-icon" aria-hidden="true">
+            <svg viewBox="0 0 52 52" fill="none"><circle cx="26" cy="26" r="25" stroke="rgba(201,153,58,0.2)" stroke-width="1"/><path d="M18 20h16M18 26h10M18 32h14" stroke="#C9993A" stroke-width="1.5" stroke-linecap="round"/><circle cx="36" cy="32" r="4" fill="rgba(201,153,58,0.15)" stroke="#C9993A" stroke-width="1.5"/><path d="M34.5 32l1 1 2-2" stroke="#C9993A" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </div>
+          <div class="service-name">Restaurant Turnaround</div>
+          <p class="service-desc">When your restaurant is in crisis, you need expert intervention — fast. Our turnaround specialists assess, triage, and stabilize failing operations within weeks, implementing recovery protocols that have saved hundreds of venues from closure.</p>
+          <a href="#contact" class="service-arrow">
+            Learn More
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ────────────────────────────────────────── STATS -->
+  <section class="stats-section" aria-label="Company statistics">
+    <div class="section-inner">
+      <div class="stats-grid">
+        <div class="stat-item reveal">
+          <div class="stat-num" data-count="650">650+</div>
+          <div class="stat-label">Restaurants Transformed</div>
+        </div>
+        <div class="stat-item reveal reveal-delay-1">
+          <div class="stat-num">$2.8B+</div>
+          <div class="stat-label">Revenue Generated for Clients</div>
+        </div>
+        <div class="stat-item reveal reveal-delay-2">
+          <div class="stat-num">97%</div>
+          <div class="stat-label">Client Satisfaction Rate</div>
+        </div>
+        <div class="stat-item reveal reveal-delay-3">
+          <div class="stat-num">40+</div>
+          <div class="stat-label">Countries Served Worldwide</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────────────────────────────────── WHY BXB -->
+  <section class="why-section" id="about-bxb">
+    <div class="section-inner">
+      <div class="why-grid">
+        <div class="why-visual reveal">
+          <img
+            src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=900&auto=format&fit=crop&q=80"
+            alt="Restaurant consulting strategy session"
+            class="why-img-main"
+            loading="lazy"
+          >
+          <img
+            src="https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=600&auto=format&fit=crop&q=80"
+            alt="Exquisite restaurant cuisine"
+            class="why-img-accent"
+            loading="lazy"
+          >
+          <div class="why-badge" aria-label="25 plus years of excellence">
+            <span class="why-badge-num">25+</span>
+            <span class="why-badge-text">Years of<br>Excellence</span>
+          </div>
+        </div>
+
+        <div class="why-content reveal reveal-delay-2">
+          <div class="section-eyebrow">Why BXB Worldwide</div>
+          <h2 class="section-title">We've Sat Where <em>You're Sitting</em></h2>
+          <p class="section-body">
+            Every BXB consultant has owned and operated successful restaurants. We don't theorize from boardrooms — we bring battle-tested strategies from real kitchens, real dining rooms, and real P&Ls.
+          </p>
+          <div class="why-points">
+            <div class="why-point">
+              <div class="why-point-icon" aria-hidden="true">
+                <svg viewBox="0 0 20 20" fill="none"><path d="M3 10l5 5 9-9" stroke="#C9993A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              <div class="why-point-content">
+                <h4>Operator-First Philosophy</h4>
+                <p>Our strategies are built for real-world implementation, not MBA case studies. Everything we recommend, we've done ourselves in our own restaurants.</p>
+              </div>
+            </div>
+            <div class="why-point">
+              <div class="why-point-icon" aria-hidden="true">
+                <svg viewBox="0 0 20 20" fill="none"><path d="M10 2l2 6h6l-5 4 2 6-5-4-5 4 2-6-5-4h6z" stroke="#C9993A" stroke-width="1.5" stroke-linejoin="round"/></svg>
+              </div>
+              <div class="why-point-content">
+                <h4>Performance Guarantee</h4>
+                <p>We're so confident in our methods that we offer a 90-day guarantee. If you don't see measurable improvement, we continue working for free until you do.</p>
+              </div>
+            </div>
+            <div class="why-point">
+              <div class="why-point-icon" aria-hidden="true">
+                <svg viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="8" stroke="#C9993A" stroke-width="1.5"/><path d="M10 6v4l3 3" stroke="#C9993A" stroke-width="1.5" stroke-linecap="round"/></svg>
+              </div>
+              <div class="why-point-content">
+                <h4>Speed to Results</h4>
+                <p>We move fast. Our rapid diagnostic process identifies your top revenue opportunities in days — not months — so you start seeing returns almost immediately.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ──────────────────────────────────────── PROCESS -->
+  <section class="process-section" id="process">
+    <div class="section-inner">
+      <div class="process-header reveal">
+        <div class="section-eyebrow">How It Works</div>
+        <h2 class="section-title">Our <em>Proven</em> Process</h2>
+        <p class="section-body" style="margin: 16px auto 0; text-align: center;">
+          Four precision-engineered phases designed to diagnose, transform, and accelerate your restaurant's performance.
+        </p>
+      </div>
+      <div class="process-steps">
+        <div class="process-step reveal">
+          <div class="step-num">01</div>
+          <div class="step-title">Deep Discovery</div>
+          <p class="step-desc">We spend 2–3 days onsite — eating your food, watching your service, interviewing your team, and dissecting your financials. Nothing is theoretical at this stage.</p>
+        </div>
+        <div class="process-step reveal reveal-delay-1">
+          <div class="step-num">02</div>
+          <div class="step-title">Strategic Blueprint</div>
+          <p class="step-desc">We deliver a comprehensive, prioritized action plan — your personalized restaurant transformation roadmap — with ROI projections for every recommended change.</p>
+        </div>
+        <div class="process-step reveal reveal-delay-2">
+          <div class="step-num">03</div>
+          <div class="step-title">Hands-On Implementation</div>
+          <p class="step-desc">We don't hand you a report and disappear. Our team embeds with yours, training staff, renegotiating supplier contracts, and driving change at every level.</p>
+        </div>
+        <div class="process-step reveal reveal-delay-3">
+          <div class="step-num">04</div>
+          <div class="step-title">Scale & Sustain</div>
+          <p class="step-desc">We build systems, dashboards, and management routines that let your restaurant thrive independently — then stay on as strategic partners to fuel continued growth.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────────────────────────── TESTIMONIALS -->
+  <section class="testimonials-section" id="testimonials">
+    <div class="section-inner">
+      <div class="testimonials-header">
+        <div class="reveal">
+          <div class="section-eyebrow">Client Voices</div>
+          <h2 class="section-title">Real Owners.<br><em>Real Results.</em></h2>
+        </div>
+        <div class="reveal reveal-delay-2">
+          <a href="#contact" class="btn-outline">Read All Reviews</a>
+        </div>
+      </div>
+      <div class="testimonials-grid">
+        <div class="testimonial-card reveal">
+          <div class="stars" aria-label="5 stars">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"/></svg>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"/></svg>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"/></svg>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"/></svg>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"/></svg>
+          </div>
+          <span class="quote-mark" aria-hidden="true">"</span>
+          <p class="testimonial-text">BXB Worldwide didn't just consult us — they transformed our entire business. Our revenues went from $1.2M to $3.1M in 14 months. Their menu engineering alone added $400,000 to our annual bottom line.</p>
+          <div class="testimonial-author">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&auto=format&fit=crop&q=80" alt="Marcus Thompson, restaurant owner" class="author-avatar" loading="lazy">
+            <div>
+              <div class="author-name">Marcus Thompson</div>
+              <div class="author-role">Owner, Ember &amp; Oak — Chicago, IL</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card reveal reveal-delay-1">
+          <div class="stars" aria-label="5 stars">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"/></svg>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"/></svg>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"/></svg>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"/></svg>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"/></svg>
+          </div>
+          <span class="quote-mark" aria-hidden="true">"</span>
+          <p class="testimonial-text">We were three months from closing when we called BXB. Within 90 days, we were profitable for the first time in two years. The turnaround team was extraordinary — fast, decisive, and genuinely invested in our success.</p>
+          <div class="testimonial-author">
+            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&auto=format&fit=crop&q=80" alt="Priya Venkataraman, restaurant owner" class="author-avatar" loading="lazy">
+            <div>
+              <div class="author-name">Priya Venkataraman</div>
+              <div class="author-role">Owner, Saffron Table — Austin, TX</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card reveal reveal-delay-2">
+          <div class="stars" aria-label="5 stars">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"/></svg>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"/></svg>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"/></svg>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"/></svg>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"/></svg>
+          </div>
+          <span class="quote-mark" aria-hidden="true">"</span>
+          <p class="testimonial-text">I've opened five restaurants in my career. BXB Worldwide is the reason the last three have been profitable from day one. Their concept development and pre-opening support is unlike anything else in the industry.</p>
+          <div class="testimonial-author">
+            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&auto=format&fit=crop&q=80" alt="James Okafor, CEO" class="author-avatar" loading="lazy">
+            <div>
+              <div class="author-name">James Okafor</div>
+              <div class="author-role">CEO, Meridian Hospitality Group — NYC</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────────────────────────── RESULTS / CASE STUDIES -->
+  <section class="results-section" id="results">
+    <div class="section-inner">
+      <div class="results-header reveal">
+        <div class="section-eyebrow">Case Studies</div>
+        <h2 class="section-title">Proof That <em>Our Work Works</em></h2>
+        <p class="section-body" style="margin: 16px auto 0; text-align: center;">
+          Not promises. Not projections. Real results from real restaurants that trusted BXB Worldwide.
+        </p>
+      </div>
+      <div class="results-grid">
+        <div class="result-card reveal">
+          <div class="result-img-wrap">
+            <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=700&auto=format&fit=crop&q=80" alt="The Grandview Bistro fine dining interior" class="result-img" loading="lazy">
+          </div>
+          <div class="result-body">
+            <span class="result-tag">Turnaround</span>
+            <div class="result-name">The Grandview Bistro</div>
+            <p class="result-desc">A 4-year-old fine dining concept losing $28K/month. BXB redesigned operations, retrained staff, and re-engineered the menu in 60 days.</p>
+            <div class="result-metrics">
+              <div class="result-metric"><span class="val">+$84K</span><span class="key">Monthly Revenue</span></div>
+              <div class="result-metric"><span class="val">-41%</span><span class="key">Food Cost</span></div>
+              <div class="result-metric"><span class="val">4.9★</span><span class="key">Google Rating</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="result-card reveal reveal-delay-1">
+          <div class="result-img-wrap">
+            <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=700&auto=format&fit=crop&q=80" alt="Coastal Crunch Kitchen fast casual concept" class="result-img" loading="lazy">
+          </div>
+          <div class="result-body">
+            <span class="result-tag">Growth Strategy</span>
+            <div class="result-name">Coastal Crunch Kitchen</div>
+            <p class="result-desc">A fast-casual concept stuck at single-location revenue. BXB built a franchise model and multi-unit expansion strategy launching in 3 states.</p>
+            <div class="result-metrics">
+              <div class="result-metric"><span class="val">8 Units</span><span class="key">Opened in 18mo</span></div>
+              <div class="result-metric"><span class="val">+220%</span><span class="key">Revenue Growth</span></div>
+              <div class="result-metric"><span class="val">$4.2M</span><span class="key">Annual Revenue</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="result-card reveal reveal-delay-2">
+          <div class="result-img-wrap">
+            <img src="https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?w=700&auto=format&fit=crop&q=80" alt="Onyx Bar and Kitchen concept" class="result-img" loading="lazy">
+          </div>
+          <div class="result-body">
+            <span class="result-tag">Concept Development</span>
+            <div class="result-name">Onyx Bar &amp; Kitchen</div>
+            <p class="result-desc">From blank concept brief to fully operational restaurant in 7 months. BXB handled brand, menu, build-out consulting, hiring, and launch marketing.</p>
+            <div class="result-metrics">
+              <div class="result-metric"><span class="val">$1.8M</span><span class="key">Year-1 Revenue</span></div>
+              <div class="result-metric"><span class="val">27%</span><span class="key">Net Margin Y1</span></div>
+              <div class="result-metric"><span class="val">Full</span><span class="key">Every Weekend</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────────────────────── INDUSTRIES WE SERVE -->
+  <section class="industries-section">
+    <div class="section-inner">
+      <div class="industries-header reveal">
+        <div class="section-eyebrow">Industries We Serve</div>
+        <h2 class="section-title">Every Format. <em>Every Scale.</em></h2>
+      </div>
+      <div class="industries-row reveal reveal-delay-1">
+        <div class="industry-pill"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 2c-3 0-5 2-5 5s2 5 5 5 5-2 5-5-2-5-5-5zm0 2c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3z" fill="currentColor"/></svg>Fine Dining</div>
+        <div class="industry-pill"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="2" y="5" width="12" height="8" rx="1" stroke="currentColor" stroke-width="1.5"/><path d="M5 5V4a3 3 0 016 0v1" stroke="currentColor" stroke-width="1.5"/></svg>Fast Casual</div>
+        <div class="industry-pill"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 12l3-6 2 4 2-3 3 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>QSR &amp; Fast Food</div>
+        <div class="industry-pill"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.5"/><path d="M8 5v3l2 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>Bars &amp; Nightlife</div>
+        <div class="industry-pill"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 14V4l6-2 6 2v10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><rect x="5" y="8" width="6" height="6" stroke="currentColor" stroke-width="1.5"/></svg>Hotel Restaurants</div>
+        <div class="industry-pill"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 2L4 6H2l1 8h10l1-8h-2L8 2z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>Ghost Kitchens</div>
+        <div class="industry-pill"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="6" r="3" stroke="currentColor" stroke-width="1.5"/><path d="M3 14c0-2.761 2.239-5 5-5s5 2.239 5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>Franchise Chains</div>
+        <div class="industry-pill"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="2" y="3" width="12" height="9" rx="1" stroke="currentColor" stroke-width="1.5"/><path d="M5 14h6M8 12v2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>Catering Operations</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────────────────────────────── CTA / CONTACT -->
+  <section class="cta-section" id="contact">
+    <div class="cta-bg">
+      <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1800&auto=format&fit=crop&q=80" alt="" role="presentation" loading="lazy">
+    </div>
+    <div class="section-inner">
+      <div class="cta-inner">
+        <div class="cta-left reveal">
+          <div class="section-eyebrow">Start Your Transformation</div>
+          <h2 class="section-title">Ready to Build a<br><em>Thriving</em> Restaurant?</h2>
+          <p class="section-body">Schedule your free 45-minute strategy session with a BXB Worldwide consultant. No pitch decks. No pressure. Just a candid conversation about your restaurant's biggest opportunities.</p>
+          <div class="cta-features">
+            <div class="cta-feature"><span class="cta-feature-dot"></span> Completely free — no commitment required</div>
+            <div class="cta-feature"><span class="cta-feature-dot"></span> Speak directly with a senior consultant</div>
+            <div class="cta-feature"><span class="cta-feature-dot"></span> Walk away with 3 actionable insights</div>
+            <div class="cta-feature"><span class="cta-feature-dot"></span> 90-day results guarantee on all engagements</div>
+            <div class="cta-feature"><span class="cta-feature-dot"></span> Available same-week for urgent turnarounds</div>
+          </div>
+        </div>
+
+        <div class="cta-form reveal reveal-delay-2">
+          <div class="form-title">Get Your Free Consultation</div>
+          <p class="form-sub">We respond within 2 business hours</p>
+          <form id="consultForm">
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="fname">First Name</label>
+                <input type="text" id="fname" name="fname" class="form-input" placeholder="John" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="lname">Last Name</label>
+                <input type="text" id="lname" name="lname" class="form-input" placeholder="Smith" required>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="email">Email Address</label>
+                <input type="email" id="email" name="email" class="form-input" placeholder="john@myrestaurant.com" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="phone">Phone Number</label>
+                <input type="tel" id="phone" name="phone" class="form-input" placeholder="+1 (555) 000-0000">
+              </div>
+            </div>
+            <div class="form-row" style="grid-template-columns:1fr;">
+              <div class="form-group full">
+                <label class="form-label" for="rname">Restaurant Name</label>
+                <input type="text" id="rname" name="rname" class="form-input" placeholder="My Restaurant" required>
+              </div>
+            </div>
+            <div class="form-row" style="grid-template-columns:1fr 1fr;">
+              <div class="form-group">
+                <label class="form-label" for="rtype">Restaurant Type</label>
+                <select id="rtype" name="rtype" class="form-select">
+                  <option value="">Select type...</option>
+                  <option>Fine Dining</option>
+                  <option>Fast Casual</option>
+                  <option>QSR / Fast Food</option>
+                  <option>Bar &amp; Lounge</option>
+                  <option>Hotel Restaurant</option>
+                  <option>Catering</option>
+                  <option>Ghost Kitchen</option>
+                  <option>Franchise</option>
+                  <option>Other</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="revenue">Annual Revenue</label>
+                <select id="revenue" name="revenue" class="form-select">
+                  <option value="">Select range...</option>
+                  <option>Under $500K</option>
+                  <option>$500K – $1M</option>
+                  <option>$1M – $3M</option>
+                  <option>$3M – $10M</option>
+                  <option>Over $10M</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group full" style="margin-bottom: 20px;">
+              <label class="form-label" for="challenge">Biggest Challenge Right Now</label>
+              <textarea id="challenge" name="challenge" class="form-textarea" placeholder="Tell us what's keeping you up at night about your restaurant..."></textarea>
+            </div>
+            <button type="submit" class="form-submit" id="submitBtn">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+              Request My Free Consultation
+            </button>
+          </form>
+          <p class="form-disclaimer">Your information is 100% confidential. We never sell or share your data. By submitting you agree to be contacted by a BXB Worldwide consultant.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ──────────────────────────────────────── FOOTER -->
+  <footer>
+    <div class="section-inner">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="#" class="nav-logo" aria-label="BXB Worldwide home">
+            <div class="nav-logo-mark">
+              <svg viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <rect width="42" height="42" rx="2" fill="rgba(201,153,58,0.1)" stroke="rgba(201,153,58,0.3)" stroke-width="0.5"/>
+                <text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" font-family="Cormorant Garant, serif" font-size="18" font-weight="700" fill="#C9993A">BXB</text>
+              </svg>
+            </div>
+            <span class="nav-logo-text">BXB<span>Worldwide</span></span>
+          </a>
+          <p>The world's most trusted restaurant consulting firm. We've transformed over 650 restaurants across 40+ countries — and we're just getting started.</p>
+          <div class="footer-social">
+            <a href="#" class="social-link" aria-label="LinkedIn">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+            </a>
+            <a href="#" class="social-link" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+            </a>
+            <a href="#" class="social-link" aria-label="Facebook">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+            </a>
+            <a href="#" class="social-link" aria-label="YouTube">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 00-1.95 1.96A29 29 0 001 12a29 29 0 00.46 5.58A2.78 2.78 0 003.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 001.95-1.95A29 29 0 0023 12a29 29 0 00-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="currentColor" stroke="none"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4>Services</h4>
+          <ul class="footer-links">
+            <li><a href="#services">Operations Consulting</a></li>
+            <li><a href="#services">Menu Engineering</a></li>
+            <li><a href="#services">Financial Optimization</a></li>
+            <li><a href="#services">Staff Training</a></li>
+            <li><a href="#services">Marketing Strategy</a></li>
+            <li><a href="#services">Restaurant Turnaround</a></li>
+            <li><a href="#services">Concept Development</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul class="footer-links">
+            <li><a href="#">About BXB Worldwide</a></li>
+            <li><a href="#">Our Team</a></li>
+            <li><a href="#results">Case Studies</a></li>
+            <li><a href="#testimonials">Testimonials</a></li>
+            <li><a href="#">Press &amp; Media</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">Blog &amp; Resources</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <ul class="footer-links">
+            <li><a href="tel:+18005551234">📞 1-800-BXB-WRLD</a></li>
+            <li><a href="mailto:hello@bxbworldwide.com">✉ hello@bxbworldwide.com</a></li>
+            <li><a href="#">📍 New York · Los Angeles</a></li>
+            <li><a href="#">📍 London · Dubai · Singapore</a></li>
+            <li><a href="#contact" style="color: var(--gold); font-weight: 600;">→ Free Consultation</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div class="footer-copy">
+          © 2026 BXB Worldwide LLC. All rights reserved. |
+          <a href="#" style="color: inherit; text-decoration: none;">Privacy Policy</a> |
+          <a href="#" style="color: inherit; text-decoration: none;">Terms of Service</a>
+        </div>
+        <div class="footer-badge">
+          <span class="footer-badge-dot" aria-hidden="true"></span>
+          Accepting new clients for Q2 2026
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ── Custom Cursor
+    const cursor = document.getElementById('cursor');
+    const ring   = document.getElementById('cursor-ring');
+    let mouseX = 0, mouseY = 0, ringX = 0, ringY = 0;
+
+    document.addEventListener('mousemove', function(e) {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      cursor.style.left = mouseX + 'px';
+      cursor.style.top  = mouseY + 'px';
+    });
+
+    (function animateRing() {
+      ringX += (mouseX - ringX) * 0.12;
+      ringY += (mouseY - ringY) * 0.12;
+      ring.style.left = ringX + 'px';
+      ring.style.top  = ringY + 'px';
+      requestAnimationFrame(animateRing);
+    })();
+
+    // Cursor scale on hover
+    document.querySelectorAll('a, button').forEach(function(el) {
+      el.addEventListener('mouseenter', function() {
+        cursor.style.width  = '6px';
+        cursor.style.height = '6px';
+        ring.style.width    = '60px';
+        ring.style.height   = '60px';
+        ring.style.borderColor = 'rgba(201,153,58,0.9)';
+      });
+      el.addEventListener('mouseleave', function() {
+        cursor.style.width  = '';
+        cursor.style.height = '';
+        ring.style.width    = '';
+        ring.style.height   = '';
+        ring.style.borderColor = '';
+      });
+    });
+
+    // ── Nav scroll
+    var navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', function() {
+      navbar.classList.toggle('scrolled', window.scrollY > 60);
+    }, { passive: true });
+
+    // ── Scroll reveal
+    var revealEls = document.querySelectorAll('.reveal');
+    var revealObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    revealEls.forEach(function(el) { revealObserver.observe(el); });
+
+    // ── Counter animation
+    function animateCounter(el, target) {
+      var start = 0;
+      var duration = 2000;
+      var startTime = performance.now();
+      function update(time) {
+        var progress = Math.min((time - startTime) / duration, 1);
+        var ease = 1 - Math.pow(1 - progress, 4);
+        var current = Math.round(start + (target - start) * ease);
+        el.textContent = current.toLocaleString() + '+';
+        if (progress < 1) requestAnimationFrame(update);
+      }
+      requestAnimationFrame(update);
+    }
+
+    var statsObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          var el = entry.target;
+          var raw = el.getAttribute('data-count');
+          if (raw) animateCounter(el, parseInt(raw, 10));
+          statsObserver.unobserve(el);
+        }
+      });
+    }, { threshold: 0.5 });
+    document.querySelectorAll('[data-count]').forEach(function(el) { statsObserver.observe(el); });
+
+    // ── Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(function(a) {
+      a.addEventListener('click', function(e) {
+        var id = a.getAttribute('href');
+        if (id === '#') return;
+        var target = document.querySelector(id);
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+
+    // ── Form submit (safe DOM manipulation — no innerHTML)
+    document.getElementById('consultForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      var btn = document.getElementById('submitBtn');
+
+      // Build new content using safe DOM methods
+      btn.textContent = '';
+
+      var icon = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      icon.setAttribute('width', '18');
+      icon.setAttribute('height', '18');
+      icon.setAttribute('viewBox', '0 0 24 24');
+      icon.setAttribute('fill', 'none');
+      icon.setAttribute('stroke', 'currentColor');
+      icon.setAttribute('stroke-width', '2.5');
+      icon.setAttribute('aria-hidden', 'true');
+      var checkPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+      checkPath.setAttribute('d', 'M20 6L9 17l-5-5');
+      icon.appendChild(checkPath);
+
+      var label = document.createTextNode(' Consultation Requested!');
+
+      btn.appendChild(icon);
+      btn.appendChild(label);
+      btn.style.background = '#2D7A4F';
+      btn.style.color = '#fff';
+      btn.disabled = true;
+    });
+
+    // ── Magnetic buttons
+    document.querySelectorAll('.btn-primary, .btn-outline, .floating-phone').forEach(function(btn) {
+      btn.addEventListener('mousemove', function(e) {
+        var rect = btn.getBoundingClientRect();
+        var x = e.clientX - rect.left - rect.width  / 2;
+        var y = e.clientY - rect.top  - rect.height / 2;
+        btn.style.transform = 'translate(' + (x * 0.15) + 'px, ' + (y * 0.25 - 2) + 'px)';
+      });
+      btn.addEventListener('mouseleave', function() {
+        btn.style.transform = '';
+      });
+    });
+
+    // ── Hero parallax
+    window.addEventListener('scroll', function() {
+      var heroImg = document.querySelector('.hero-img');
+      if (heroImg) {
+        heroImg.style.transform = 'scale(1.05) translateY(' + (window.scrollY * 0.2) + 'px)';
+      }
+    }, { passive: true });
+  </script>
+</body>
+</html>
